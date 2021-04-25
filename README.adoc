@@ -1,0 +1,127 @@
+= Getting Started with IoT Edge development using Quarkus on CentOs Stream
+:experimental:
+:imagesdir: images
+
+
+This project implements on how developers get started with IoT edge development on CentOS Stream but we’ll also showcase how Quarkus, a cloud-native Java framework enables developers to integrate a lightweight message broker for processing data streams from the IoT devices in a reactive way, as shown in Figure 1.
+
+image::QuarkusCentOS.png[arch.png, 900]
+
+Figure 1. Hige Level Architecture for IoT Edge Development
+
+== Quarkus SmallRye Messaging and RESTEasy extensions
+
+`SmallRye Reactive` messaging is a framework for building event-driven, data streaming, and event-sourcing applications using CDI. It lets your application interaction using various messaging technologies such as Apache Kafka, AMQP or MQTT. The framework provides a flexible programming model bridging CDI and event-driven. https://smallrye.io/smallrye-reactive-messaging/smallrye-reactive-messaging/2/index.html[SmallRye Messaging^]
+
+I also used the quickstarts for inspiration and understanding the basics [Quarkus quickstarts](https://github.com/quarkusio/quarkus-quickstarts)
+And the accompanying [guides](https://quarkus.io/guides/)
+
+Once you add the extensions, `pom.xml` in your Maven project should look like:
+
+[source,xml]
+----
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-smallrye-reactive-messaging-mqtt</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-arc</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-resteasy</artifactId>
+    </dependency>
+----
+
+== CentOS Stream
+
+One of the Linux distributions that provides a reliable open source OS platform to handle various business applications from traditional enterprise Java to cloud, IoT edge, and AI/ML environments. CentOS Stream is a free midstream between https://getfedora.org/[Fedora^] and https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux[Red Hat Enterprise Linux (RHEL)^] to provide full features of _RHEL_ by delivering a clear governance model, increased transparency, and access. For more information to download and install the CentOS Steam https://www.centos.org/download/[here^].
+
+
+== Podman
+
+https://podman.io/getting-started/[Podman^] is a utility provided as part of the `libpod` library. It can be used to create and maintain containers. The following tutorial will teach you how to set up _Podman_ and perform some basic commands.
+
+
+== Mosquitto
+
+https://mosquitto.org/[Eclipse Mosquitto^] is an open source (EPL/EDL licensed) message broker that implements the *MQTT* protocol versions 5.0, 3.1.1 and 3.1. 
+Mosquitto is lightweight and is suitable for use on all devices from low power single board computers to full servers.
+
+To start the Mosquitto message broker, Use the following Podman command on CentOS Stream:
+
+[source,shell]
+----
+$ podman run --name mosquitto --rm -p "9001:9001" -p "1883:1883" eclipse-mosquitto:1.6.2
+----
+
+For Docker CLI users:
+
+[source,shell]
+----
+$ docker run -p 9001:9001 -p 1883:1883 -it eclipse-mosquitto:1.6.2
+----
+
+== Edge Devices
+
+The device in this case an emulated one `ESP8266-01` that throws Temperature and heat as a Json into the MQTT broker. That is then picked up as a reactive channel and throws that data out after processing into the stream.  The stream is read by the browser and displays the data in realtime. The emulated device can easily be changed to a real one, however the data thrown should be in the correct Json format.
+
+== Running the application in dev mode
+
+You can run your application in dev mode that enables live coding using:
+
+[source,shell]
+----
+./mvnw compile quarkus:dev
+----
+
+[NOTE]
+====
+Quarkus now ships with a Dev UI, which is available in dev mode only at http://localhost:8080/q/dev/.
+====
+
+== Packaging and running the application
+
+The application can be packaged using:
+
+[source,shell]
+----
+./mvnw package
+----
+
+It produces the `quarkus-run.jar` file in the `target/quarkus-app/` directory.
+Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/quarkus-app/lib/` directory.
+
+If you want to build an _über-jar_, execute the following command:
+
+[source,shell]
+----
+./mvnw package -Dquarkus.package.type=uber-jar
+----
+
+The application is now runnable using `java -jar target/quarkus-app/quarkus-run.jar`.
+
+== Creating a native executable
+
+You can create a native executable using:
+
+[source,shell]
+----
+./mvnw package -Pnative
+----
+
+Or, if you don't have GraalVM installed, you can run the native executable build in a container using:
+
+[source,shell]
+----
+./mvnw package -Pnative -Dquarkus.native.container-build=true
+----
+
+== Monitoring IoT Edge Data Stream
+
+Open a web browser then access the http://localhost:8080[Dashboard^].
+
+You should see:
+
+image::Dashboard.png[screenshot.png, 900]

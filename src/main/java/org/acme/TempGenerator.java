@@ -1,12 +1,8 @@
 package org.acme;
 
 import java.util.concurrent.TimeUnit;
-
 import javax.enterprise.context.ApplicationScoped;
-
-import io.reactivex.BackpressureStrategy;
 import org.eclipse.microprofile.reactive.messaging.Outgoing;
-
 import io.reactivex.Flowable;
 
 @ApplicationScoped

@@ -9,8 +9,6 @@ import javax.ws.rs.core.MediaType;
 import org.eclipse.microprofile.reactive.messaging.Channel;
 import org.reactivestreams.Publisher;
 
-
-
 @Path("/devices")
 public class DeviceResource {
 

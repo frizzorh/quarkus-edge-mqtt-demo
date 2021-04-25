@@ -1,7 +1,5 @@
 package org.acme;
 
-import io.vertx.core.json.Json;
-
 import java.util.Random;
 
 public class Device {
@@ -27,8 +25,6 @@ public class Device {
         int min = 50;
         int max = 100;
         return (int) (Math.random() * (max - min)) + min;
-        //return random.nextInt((max-min)+min);
-
     }
 
     public void setHumidity(int humidity) {
