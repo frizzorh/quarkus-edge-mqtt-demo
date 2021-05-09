@@ -1,4 +1,4 @@
-= Getting Started with IoT Edge development using Quarkus on CentOs Stream
+= Getting Started with IoT Edge development using Quarkus on CentOS Stream
 :experimental:
 :imagesdir: images
 
