@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mqtt-broker
+  namespace: edge-demo
+spec:
+  selector:
+    matchLabels:
+      app: mqtt-broker
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mqtt-broker
+    spec:
+      containers:
+        - name: mqtt-broker
+          image: >-
+            eclipse-mosquitto:1.6.2
+          ports:
+            - containerPort: 1663
+            - containerPort: 9001

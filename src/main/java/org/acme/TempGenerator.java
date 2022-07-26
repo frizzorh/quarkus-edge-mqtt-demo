@@ -1,9 +1,10 @@
 package org.acme;
 
-import java.util.concurrent.TimeUnit;
-import javax.enterprise.context.ApplicationScoped;
-import org.eclipse.microprofile.reactive.messaging.Outgoing;
 import io.reactivex.Flowable;
+import org.eclipse.microprofile.reactive.messaging.Outgoing;
+
+import javax.enterprise.context.ApplicationScoped;
+import java.util.concurrent.TimeUnit;
 
 @ApplicationScoped
 public class TempGenerator {
