@@ -38,7 +38,7 @@ spec:
 
 ---
 
-apiVersion: v1
+apiVersion: apps.openshift.io/v1
 kind: DeploymentConfig
 metadata:
   labels:
@@ -62,7 +62,7 @@ spec:
               value: :8087
             - name: INFLUXDB_UDP_DATABASE
               value: udp
-          image: influxdb
+          image: influxdb:2.3-alpine
           imagePullPolicy: Always
           name: influxdb
           ports:
@@ -73,7 +73,7 @@ spec:
             - containerPort: 8083
               protocol: TCP
           volumeMounts:
-            - mountPath: /var/lib/influxdb
+            - mountPath: /var/lib/influxdb2
               name: influxdb-data
       dnsPolicy: ClusterFirst
       restartPolicy: Always
