@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mqtt-broker
+spec:
+  ports:
+    - name: port-1
+      port: 1663
+      protocol: TCP
+      targetPort: 1663
+    - name: port-2
+      port: 9001
+      protocol: TCP
+      targetPort: 9001
+  selector:
+    app: mqtt-broker
