@@ -7,7 +7,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: ${STORAGE_SIZE}
+      storage: 1Gi
 
 ---
 
