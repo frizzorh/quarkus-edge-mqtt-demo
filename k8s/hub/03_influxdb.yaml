@@ -62,7 +62,7 @@ spec:
               value: :8087
             - name: INFLUXDB_UDP_DATABASE
               value: udp
-          image: influxdb:2.3-alpine
+          image: influxdb:1.8
           imagePullPolicy: Always
           name: influxdb
           ports:
@@ -73,7 +73,7 @@ spec:
             - containerPort: 8083
               protocol: TCP
           volumeMounts:
-            - mountPath: /var/lib/influxdb2
+            - mountPath: /var/lib/influxdb
               name: influxdb-data
       dnsPolicy: ClusterFirst
       restartPolicy: Always
