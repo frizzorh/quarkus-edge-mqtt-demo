@@ -44,3 +44,24 @@ spec:
       maxSurge: 25%
   revisionHistoryLimit: 10
   progressDeadlineSeconds: 600
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: kafdrop
+  labels:
+    app: kafdrop
+    app.kubernetes.io/component: kafdrop
+    app.kubernetes.io/instance: kafdrop
+    app.kubernetes.io/name: kafdrop
+spec:
+  ports:
+    - name: 9000-tcp
+      protocol: TCP
+      port: 9000
+      targetPort: 9000
+  internalTrafficPolicy: Cluster
+  type: ClusterIP
+  selector:
+    app: kafdrop
+    deploymentconfig: kafdrop
