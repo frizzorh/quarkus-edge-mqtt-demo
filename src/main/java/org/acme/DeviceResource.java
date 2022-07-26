@@ -17,12 +17,6 @@ public class DeviceResource {
     Publisher<String> data;
 
     @GET
-    @Produces(MediaType.TEXT_PLAIN)
-    public String hello() {
-        return "hello";
-    }
-
-    @GET
     @Path("stream")
     @Produces(MediaType.SERVER_SENT_EVENTS)
     public Publisher<String> stream() {
