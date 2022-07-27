@@ -15,6 +15,6 @@ spec:
       containers:
         - name: mqtt-kafka-bridge
           image: >-
-            quay.io/frossi/quarkus-edge-mqtt-demo
+            docker.io/frizzorossi/quarkus-edge-mqtt-demo
           ports:
             - containerPort: 8080
