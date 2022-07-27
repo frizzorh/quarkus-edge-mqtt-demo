@@ -5,9 +5,9 @@ metadata:
 spec:
   ports:
     - name: port-1
-      port: 1663
+      port: 1883
       protocol: TCP
-      targetPort: 1663
+      targetPort: 1883
     - name: port-2
       port: 9001
       protocol: TCP

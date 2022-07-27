@@ -17,5 +17,5 @@ spec:
           image: >-
             eclipse-mosquitto:1.6.2
           ports:
-            - containerPort: 1663
+            - containerPort: 1883
             - containerPort: 9001
