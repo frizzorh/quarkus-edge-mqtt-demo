@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mqtt-kafka-bridge
+spec:
+  selector:
+    matchLabels:
+      app: mqtt-kafka-bridge
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mqtt-kafka-bridge
+    spec:
+      containers:
+        - name: mqtt-kafka-bridge
+          image: >-
+            quay.io/frossi/quarkus-edge-mqtt-demo
+          ports:
+            - containerPort: 8080

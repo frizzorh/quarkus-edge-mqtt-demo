@@ -14,19 +14,23 @@ public class CamelRoutes extends RouteBuilder {
     String mqttBrokerHostname;
     @ConfigProperty(name = "mp.messaging.incoming.devices.port")
     String mqttBrokerPort;
+    @ConfigProperty(name = "kafka.bootstrap")
+    String kafkaBootstrap;
+    @ConfigProperty(name = "kafka.topic")
+    String kafkaTopic;
 
     @Override
     public void configure() throws Exception {
-        from("timer:foo?period=1000")
-                .log("Hello World");
 
-        from(getUri())
-                .log("mqtt");
+        from(getMqttUri())
+                .to(getKafkaUri());
     }
 
-    private String getUri() {
-        //return "paho:{{mp.messaging.incoming.device-temp.topic}}?brokerUrl=tcp://{{mp.messaging.incoming.device-temp.host}}:{{mp.messaging.incoming.device-temp.port}}";
+    private String getKafkaUri() {
+        return "kafka:" + topic + "?brokers=" + kafkaBootstrap;
+    }
 
+    private String getMqttUri() {
         return "paho:" +
                 topic +
                 "?brokerUrl=tcp://" + mqttBrokerHostname + ":" + mqttBrokerPort;
