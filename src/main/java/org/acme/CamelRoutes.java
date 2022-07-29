@@ -8,31 +8,16 @@ import javax.enterprise.context.ApplicationScoped;
 @ApplicationScoped
 public class CamelRoutes extends RouteBuilder {
 
-    @ConfigProperty(name = "mp.messaging.incoming.devices.topic")
-    String topic;
-    @ConfigProperty(name = "mp.messaging.incoming.devices.host")
-    String mqttBrokerHostname;
-    @ConfigProperty(name = "mp.messaging.incoming.devices.port")
-    String mqttBrokerPort;
-    @ConfigProperty(name = "kafka.bootstrap")
-    String kafkaBootstrap;
-    @ConfigProperty(name = "kafka.topic")
-    String kafkaTopic;
+    @ConfigProperty(name = "routes.kafka.camelURI")
+    String kafkaURI;
+
+    @ConfigProperty(name = "routes.mqtt.camelURI")
+    String mqttURI;
 
     @Override
-    public void configure() throws Exception {
+    public void configure() {
 
-        from(getMqttUri())
-                .to(getKafkaUri());
+        from(mqttURI).to(kafkaURI);
     }
 
-    private String getKafkaUri() {
-        return "kafka:" + topic + "?brokers=" + kafkaBootstrap;
-    }
-
-    private String getMqttUri() {
-        return "paho:" +
-                topic +
-                "?brokerUrl=tcp://" + mqttBrokerHostname + ":" + mqttBrokerPort;
-    }
 }
