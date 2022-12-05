@@ -27,7 +27,7 @@ spec:
           env:
             - name: KAFKA_BROKERCONNECT
               value: >-
-                a2859063098c744dbaeb654497d73283-1866370312.eu-central-1.elb.amazonaws.com:9094
+                a247a0f3beefe4c24800fd93d333b0fe-798988284.eu-central-1.elb.amazonaws.com:9094
           resources: {}
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
