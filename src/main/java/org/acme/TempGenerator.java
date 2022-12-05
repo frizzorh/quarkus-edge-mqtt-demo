@@ -5,6 +5,7 @@ import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.eclipse.microprofile.reactive.messaging.Outgoing;
 
 import javax.enterprise.context.ApplicationScoped;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 @ApplicationScoped
@@ -12,8 +13,8 @@ public class TempGenerator {
 
     private Device device;
 
-    public TempGenerator(@ConfigProperty(name = "HOSTNAME") String hostname) {
-        this.device = new Device(hostname);
+    public TempGenerator(@ConfigProperty(name = "device.name") String deviceName) {
+        this.device = new Device(deviceName);
     }
 
     @Outgoing("device-temp")
