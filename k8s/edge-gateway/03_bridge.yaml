@@ -21,5 +21,4 @@ spec:
           env:
             - name: KAFKA_BOOTSTRAP
               value: a247a0f3beefe4c24800fd93d333b0fe-798988284.eu-central-1.elb.amazonaws.com:9094
-            - name: DEVICE_NAME
-              value: AWS_DEVICE
+
