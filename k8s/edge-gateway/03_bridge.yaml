@@ -20,7 +20,7 @@ spec:
             - containerPort: 8080
           env:
             - name: KAFKA_BOOTSTRAP
-              value: a247a0f3beefe4c24800fd93d333b0fe-798988284.eu-central-1.elb.amazonaws.com:9094
+              value: ae60f20d9caed492987c84b17094761b-537900584.us-east-2.elb.amazonaws.com:9094
             - name: DEVICE_NAME
               value: my_device
 
